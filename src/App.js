@@ -78,7 +78,7 @@ class App extends Component {
   }
 
   functionHandleChange(e){
-      let value =e.target.value;
+      let value =e.target.value.toLowerCase();
       this.props.store.dispatch(this.getUser(value));
     }
 
