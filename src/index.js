@@ -6,6 +6,7 @@ import registerServiceWorker from './registerServiceWorker';
 import reducer from './reducer'
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import { Provider } from 'react-redux';
 
 
 
@@ -15,5 +16,12 @@ const store = createStore(
   applyMiddleware(thunk)
 );
 
-ReactDOM.render(<App  store={store}/>, document.getElementById('root'));
+
+
+
+console.log("vale of store state inside index js",store.getState())
+ReactDOM.render(
+    <Provider store={store}>
+      <App  store={store}/>
+    </Provider>, document.getElementById('root'));
 registerServiceWorker();

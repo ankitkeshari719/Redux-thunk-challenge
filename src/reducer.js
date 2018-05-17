@@ -1,23 +1,35 @@
-export default function reducer(state={input:2}, action){
+function reducer(state={input:2, response:{}}, action){
 
-  console.log("value of action inside reducer", action);
+  console.log("value of action inside reducer", state);
   
-  if( action.type === 'SUBMIT') {
+  if( action.type === 'UPDATE_USERINPUT') {
    return{
     ...state ,
-    input:action.updateInput,
-     test:`hello`
+    input:action.updateInput
+    
    }
   }
  
-   if (action.type === 'RESPONSE'){
+   if (action.type === 'SAVE_RESPONSE'){
      
      return{
       ...state,
-      response: state.response ? state.response.concat([action.saveResponse]) : [action.saveResponse]
-     }
+      saveAllResponses:state.response[action.saveResponse.login]=action.saveResponse,
+      showProfile:true
+    }
+   }
+   
+   if( action.type === 'NEW_TIMEOUT') {
+    return{
+     ...state ,
+     newTimeOut:action.timeOut
+     
+    }
+   }else{
+     return state
    }
    
 }
 
+export default reducer;
 
