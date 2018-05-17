@@ -51,17 +51,16 @@ class App extends Component {
           .then((response)=>
           {
             console.log(response)
-            this.props.store.dispatch(
-              {
-              type:"SAVE_RESPONSE",
-              currentResponse:response.data,
-              showProfile:true
-              })
+            dispatch({
+              type: "SAVE_RESPONSE",
+              currentResponse: response.data,
+              showProfile: true
+            })
           })
           
         }
         else{
-          this.props.store.dispatch({
+          dispatch({
             type:"SAVE_RESPONSE",
             currentResponse:this.props.responsesList[value]
             
@@ -70,7 +69,7 @@ class App extends Component {
         }
       },3000)
       
-      this.props.store.dispatch({
+      dispatch({
         type:"NEW_TIMEOUT",
         timeOut
       })
