@@ -1,4 +1,4 @@
-function reducer(state={input:2, response:{}}, action){
+function reducer(state={input:2, responsesList:{}}, action){
 
   console.log("value of action inside reducer", state);
   
@@ -14,7 +14,8 @@ function reducer(state={input:2, response:{}}, action){
      
      return{
       ...state,
-      saveAllResponses:state.response[action.saveResponse.login]=action.saveResponse,
+      currentResponse:action.currentResponse,
+      responsesList:Object.assign({}, state.responsesList, {[action.currentResponse.login]: action.currentResponse}),
       showProfile:true
     }
    }

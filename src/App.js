@@ -39,12 +39,14 @@ class App extends Component {
       //start tracking continuity in users input
       //To do the tracking we have keep a count of setTimeout function which is getting
       // fire on input change
-      this.props.timeOut && clearTimeout(this.props.timeOut)
+      this.props.timeOut && clearTimeout(this.props.timeOut);
+      
       let timeOut = setTimeout(()=>
       {
-      
-        if(value !="")
+       
+         if(value !== "" &&  this.props.responsesList[value] === undefined )
         {
+          
           axios.get(`https://api.github.com/users/`+ value)
           .then((response)=>
           {
@@ -52,10 +54,19 @@ class App extends Component {
             this.props.store.dispatch(
               {
               type:"SAVE_RESPONSE",
-              saveResponse:response.data,
+              currentResponse:response.data,
               showProfile:true
               })
           })
+          
+        }
+        else{
+          this.props.store.dispatch({
+            type:"SAVE_RESPONSE",
+            currentResponse:this.props.responsesList[value]
+            
+          });
+          
         }
       },3000)
       
@@ -80,7 +91,7 @@ class App extends Component {
             <input type="text" name="name" onChange={this.functionHandleChange}  />
           </label>
         </form>
-        {this.props.showProfile && <ShowUserDetails info={this.props.saveResponse}/>}
+        {this.props.showProfile && <ShowUserDetails info={this.props.currentResponse}/>}
       </div>
     );
   }
@@ -91,7 +102,9 @@ const mapStateToProps = (state) => {
     updateInput:state.updateInput,
     timeOut:state.newTimeOut,
     showProfile:state.showProfile,
-    saveResponse:state.saveAllResponses
+    currentResponse:state.currentResponse,
+    responsesList:state.responsesList
+    
   };
 
 };
