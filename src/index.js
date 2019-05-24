@@ -8,16 +8,10 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 
-
-
-// console.log(typeof(reducer));
 const store = createStore(
   reducer,
   applyMiddleware(thunk)
 );
-
-
-
 
 console.log("vale of store state inside index js",store.getState())
 ReactDOM.render(

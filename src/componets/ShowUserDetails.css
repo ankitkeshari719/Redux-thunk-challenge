@@ -1,0 +1,10 @@
+.divStyle {
+  padding: 20px;
+  border: 1px solid red;
+  margin: 20px;
+  display: inline-block;
+}
+.divStyle img {
+  width: 200px;
+  height: 200px;
+}
